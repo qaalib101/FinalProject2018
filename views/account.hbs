@@ -1,0 +1,27 @@
+<h2>Welcome {{user.name}} to your account page</h2>
+<div class="flash-messages">
+    {{#if messages}}
+        <p class="error-message">{{messages.error}}</p>
+        <p class="info-message">{{messages.info}}</p>
+    {{/if}}
+</div>
+<div>
+    Profile Name: {{user.name}}
+
+    Status: {{user.status}}
+
+    Languages: <ul>
+        {{#each user.languages}}
+            <p>{{this}}</p>
+        {{/each}}
+    </ul>
+
+    Skills: <ul>
+    {{#each user.skills}}
+        <p>{{this}}</p>
+    {{/each}}
+</ul>
+</div>
+<div>
+
+</div>
