@@ -1,6 +1,7 @@
+var passport = require('passport');
 var express = require('express');
 var router = express.Router();
-var Profile = require('../models/userinfo');
+var Profile = require('../models/credentials');
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
@@ -13,62 +14,48 @@ function isLoggedIn(req, res, next) {
 router.use(isLoggedIn);
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    Profile.find({_creator: req.user, completed: false})
-        .then((docs) => {
-            res.render('index', { title: 'Incomplete tasks', tasks: docs});
+router.get('/', function(err, req, res, next) {
+    console.log(err)
+    res.render('auth');
+    console.log(err)
+});
+/*Add a new task*/
+
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/account',
+    failureRedirect: '/',
+    failureFlash: true
+}));
+
+router.get('/signup', function(req, res, next){
+    res.redirect('/signup')
+});
+
+router.get('/logout', function(req, res, next){
+    req.logout();
+    res.redirect('/')
+});
+
+router.post('/makeProfile', function(req, res, next) {
+    passport.authenticate('local-signup', {
+        successRedirect: '/',
+        failureRedirect: '/',
+        failureFlash: true
+    });
+    var user = Profile(req.body);
+    user.local = {
+        username: req.body.username,
+        password: req.body.password
+    };
+    user.languages.push();
+    user.save()
+        .then((doc) => {
+            console.log(doc);
+            res.redirect('/account');
         })
         .catch((err) => {
             next(err);
         });
-});
-/*Add a new task*/
-router.post('/add', function(req, res, next){
-
-    if (!req.body || !req.body.text) {
-        req.flash('error', 'Please enter some text');
-        res.redirect('/');
-    }
-
-    else {
-        // Save new task with text provided, for the current user, and completed = false
-        var task = Profile({ _creator: req.user, text : req.body.text, completed: false, dateCreated: new Date()});
-        task.save()
-            .then(() => {
-                res.redirect('/');
-            })
-            .catch((err) => {
-                next(err);
-            });
-    }
-});
-/*finish the task and send to completed tasks*/
-router.post('/done', function(req, res, next){
-    Profile.findOneAndUpdate( {_id: req.body._id, _creator: req.user.id}, {completed: true, dateCompleted: new Date()})
-        .then( (task) => {
-
-            if (!task) {
-                res.status(403).send('This is not your task!');
-            }
-
-            else {
-                req.flash('info', 'Profile marked as done');
-                res.redirect('/')
-            }
-
-        })
-        .catch( (err) => {
-            next(err);
-        });
-});
-/*completed page*/
-router.get('/completed', function(req, res, next) {
-    Profile.find({_creator: req.user._id, completed:true, dateDeleted: null})
-        .then((docs) => {
-            res.render('completed_tasks', {tasks: docs});
-        }).catch((err) => {
-        next(err);
-    });
 });
 /*delete the specific tasks*/
 router.post('/delete', function(req, res, next){

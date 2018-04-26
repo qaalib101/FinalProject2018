@@ -8,11 +8,11 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var MongoDBStore = require('connect-mongodb-session')(session);
 var passport = require('passport');
-var passportConfig = require('./config/passport')(passport);
+var passportConfig = require('./config/authentication')(passport);
 
 
 
-var config = require('./config/db_config');
+
 var db_url = process.env.MONGO_URL;
 
 mongoose.connect(db_url)
@@ -20,7 +20,7 @@ mongoose.connect(db_url)
     .catch((err) => {console.log('Error connecting to mLab', err); });
 
 
-var auth = require('./routes/auth');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -53,7 +53,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', auth);
+
 app.use('/', index);
 app.use('/users', users);
 // catch 404 and forward to error handler
@@ -67,12 +67,13 @@ app.use(function(err, req, res, next) {
     if(err.kind === 'ObjectId' && err.name == 'CastError'){
         err.status = 404;
         err.message = "ObjectId Not Found";
+        console.log(err.trace());
     }
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     console.log(err.kind);
-    console.log(err.name);
+    console.log(err);
     // render the error page
     res.status(err.status || 500);
     res.render('error');

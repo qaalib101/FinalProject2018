@@ -3,7 +3,7 @@
  */
 var LocalStrategy = require('passport-local');
 
-var User = require('../models/userinfo');
+var User = require('../models/credentials');
 
 /*
 

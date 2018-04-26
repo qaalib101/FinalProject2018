@@ -1,0 +1,29 @@
+<title>
+    <script src="/javascripts/addLanguage.js"></script>
+</title>
+<h3>Signup and Enter Your Information Here</h3>
+
+<ul>{{#each messages}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+<div id="editProfile">
+    <form action="/makeProfile" method="POST">
+        Username: <input type="text" name="username" required>
+        <br>
+        Password:<input type="password" name="password" required>
+        <br>
+        Status:         <select name="status">
+        <option value="busy">Busy</option>
+        <option value="free">Free</option>
+                    </select>              <br>
+        Add any programming languages you skilled in:   <input type="text" id="language"> <button id="addLanguage">Add</button><br>
+        <select name="languages" id="languageBox">
+    </select>
+        <br>
+        Add any skills or certifications you have:   <input type="text" id="skill"> <button id="addSkill">Add</button><br>
+        <select name="skills" id="skillBox">
+        </select>             <br>
+        <button type=submit>Submit</button>
+    </form>
+</div>
