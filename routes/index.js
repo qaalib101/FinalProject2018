@@ -8,50 +8,62 @@ function isLoggedIn(req, res, next) {
         res.locals.username = req.user.local.username;
         next();
     } else {
-        res.redirect('/auth')
+        res.redirect('/')
     }
 }
 router.use(isLoggedIn);
 
 /* GET home page. */
-router.get('/', function(err, req, res, next) {
-    console.log(err)
+router.get('/', function(req, res, next) {
     res.render('auth');
-    console.log(err)
 });
-/*Add a new task*/
 
+/*Add a new task*/
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/account',
-    failureRedirect: '/',
-    failureFlash: true
-}));
+        successRedirect: '/account',
+        failureRedirect: '/',
+        failureFlash: true
+    }));
+router.post('/account', function(err, req, res, next){
+    Profile.find({username: req.user.local.username})
+.then((doc) => {
+            res.render('account', {user: doc});
+        })
+        .catch((err) => {
+            next(err);
+        });
+});
 
 router.get('/signup', function(req, res, next){
-    res.redirect('/signup')
+    res.render('signup')
 });
 
 router.get('/logout', function(req, res, next){
     req.logout();
-    res.redirect('/')
+    res.redirect('/auth')
 });
 
-router.post('/makeProfile', function(req, res, next) {
-    passport.authenticate('local-signup', {
-        successRedirect: '/',
-        failureRedirect: '/',
-        failureFlash: true
-    });
+router.post('/makeProfile',passport.authenticate('local-signup', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    failureFlash: true
+}), function(req, res, next) {
+
     var user = Profile(req.body);
     user.local = {
         username: req.body.username,
         password: req.body.password
     };
-    user.languages.push();
+    for(var x = 0; x < req.body.languages.length; x++){
+        user.languages.push(req.body.languages[x]);
+    }
+    for(var y = 0; y < req.body.languages.length; y++){
+        user.skills.push(req.body.languages[x]);
+    }
     user.save()
         .then((doc) => {
             console.log(doc);
-            res.redirect('/account');
+            res.render('/account', {user: doc});
         })
         .catch((err) => {
             next(err);

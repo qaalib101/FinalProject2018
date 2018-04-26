@@ -1,4 +1,4 @@
-<h2>Welcome {{user.name}} to your account page</h2>
+<h2>Welcome {{user.username}} to your account page</h2>
 <div class="flash-messages">
     {{#if messages}}
         <p class="error-message">{{messages.error}}</p>
@@ -6,7 +6,7 @@
     {{/if}}
 </div>
 <div>
-    Profile Name: {{user.name}}
+    Profile Name: {{user.local.username}}
 
     Status: {{user.status}}
 

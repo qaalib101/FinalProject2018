@@ -75,8 +75,8 @@ module.exports = function(passport) {
 
                 //If no user, create new User, set username, and hash of password
                 var newUser = new User();
-                newUser.local.username = username;
-                newUser.local.password = newUser.generateHash(password);
+                newUser.username = username;
+                newUser.password = newUser.generateHash(password);
                 //And save. If no errors, return new User
                 newUser.save(function(err){
                     if (err) { return done(err); }
