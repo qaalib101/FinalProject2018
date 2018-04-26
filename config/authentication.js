@@ -67,7 +67,7 @@ module.exports = function(passport) {
         process.nextTick(function(){
 
             //Query DB to see if there is already a user with this username
-            User.findOne({ 'local.username' : username }, function(err, user){
+            User.findOne({ 'username' : username }, function(err, user){
                 if (err) { return done(err); }
                 if (user) {
                     return done(null, false, req.flash('signupMsg', 'This username is taken'));
@@ -98,7 +98,7 @@ module.exports = function(passport) {
         process.nextTick(function(){
 
             // Find the user with this username in DB
-            User.findOne({ 'local.username':username }, function(err, user){
+            User.findOne({ 'username':username }, function(err, user){
                 if (err) { return done(err); }
 
                 //If user not found, return error message

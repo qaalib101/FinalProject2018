@@ -6,12 +6,12 @@ router.get('/', function(req, res, next){
     res.render('auth');
 });
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/users',
     failureRedirect: '/auth',
     failureFlash: true
 }));
 router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/',
+    successRedirect: '/users',
     failureRedirect: '/auth',
     failureFlash: true
 }));

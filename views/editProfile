@@ -1,0 +1,35 @@
+<title>
+    <script src="/javascripts/addLanguage.js"></script>
+</title>
+<h3>Enter Your Information Here</h3>
+
+<ul>{{#each messages}}
+    <li>{{this}}</li>
+{{/each}}
+</ul>
+<div id="editProfile">
+    <form action="/editProfile" method="POST">
+
+        Status:         <select name="status">
+        <option value="busy">Busy</option>
+        <option value="free">Free</option>
+    </select>              <br>
+        Add any programming languages you skilled in:   <input type="text" id="language">
+        <br>
+        <select name="languages" id="languageBox">
+                {{#each user.languages}}
+                    <option>{{this}}</option>
+                {{/each}}
+        </select><button id="addLanguage">Add</button><button id="deleteLanguage">Remove</button>
+        <br>
+        Add any skills or certifications you have:   <input type="text" id="skill">
+        <select name="skills" id="skillBox">
+            {{#each user.skills}}
+                <option>{{this}}</option>
+            {{/each}}
+        </select> <button id="addSkill">Add</button><br> <button id="deleteSkill">Remove</button>
+        <br>
+        <input type="hidden" name="username" value="{{this.username}}">
+        <button type=submit>Submit</button>
+    </form>
+</div>

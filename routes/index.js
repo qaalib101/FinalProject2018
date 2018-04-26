@@ -14,41 +14,14 @@ router.use(isLoggedIn);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    if(req.user.status != null){
-        Profile.find({username: req.user.username})
-            .then((doc) => {
-                res.render('account', {user: doc})
-            });
-    }else{
-        res.redirect('/makeProfile');
-    }
-
-});
-
-router.get('/makeProfile', function(err, req, res, next){
     Profile.find({username: req.user.username})
-.then((doc) => {
-            res.render('signup', {user: doc});
-        })
-        .catch((err) => {
-            next(err);
-        });
+            .then((doc) => {
+                res.render('account', {user: doc})});
 });
 
-router.post('/makeProfile', function(req, res, next) {
 
 
-    Profile.findOneAndUpdate({username: req.body.username}, {$set:{status: req.body.status}},
-        { $push: { languages: { $each: [req.body.languages], $sort: -1 },
-                skills: { $each: [req.body.skills]} } }).save()
-        .then((doc) => {
-            console.log(doc);
-            res.render('/account', {user: doc});
-        })
-        .catch((err) => {
-            next(err);
-        });
-});
+
 
 
 module.exports = router;

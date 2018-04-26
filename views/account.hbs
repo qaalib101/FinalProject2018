@@ -5,23 +5,28 @@
         <p class="info-message">{{messages.info}}</p>
     {{/if}}
 </div>
-<div>
-    Profile Name: {{user.local.username}}
+<div><form action="/users/editProfile" method="GET">
+    Profile Name: {{user.username}}
 
     Status: {{user.status}}
 
     Languages: <ul>
-        {{#each user.languages}}
-            <p>{{this}}</p>
-        {{/each}}
-    </ul>
+    {{#each user.languages}}
+        <p>{{this}}</p>
+    {{/each}}
+</ul>
 
     Skills: <ul>
     {{#each user.skills}}
         <p>{{this}}</p>
     {{/each}}
+    <button type="submit">Edit Profile</button>
+</form>
+
 </ul>
 </div>
 <div>
+<form>
 
+</form>
 </div>

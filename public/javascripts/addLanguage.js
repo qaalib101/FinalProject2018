@@ -1,25 +1,37 @@
 var language = document.getElementById("language");
 var opt = document.createElement("option");
-var button = document.getElementById("addLanguage");
-
-button.addEventListener("click", function () {
+var addLanguage = document.getElementById("addLanguage");
+var deleteLanguage = document.getElementById("deleteLanguage");
+var languageBox = document.getElementById("languageBox");
+addLanguage.addEventListener("click", function () {
     if(skill.text == null){
 
     }else{
         opt.text = language.value;
         opt.value = language.value;
-        document.getElementById("languageBox").options.add(opt);
+        languageBox.options.add(opt);
     }
 });
-var skill = document.getElementById("skill");
-var button2 = document.getElementById("addSkill");
+deleteLanguage.addEventListener("click", function(){
+    var index = languageBox.selectedIndex;
+    languageBox.remove(index);
+});
 
-button2.addEventListener("click", function () {
+var skill = document.getElementById("skill");
+var addSkill = document.getElementById("addSkill");
+var deleteSkill = document.getElementById("deleteSkill");
+var skillBox = document.getElementById("skillBox");
+addSkill.addEventListener("click", function () {
     if(skill.text == null){
 
     }else{
         opt.text = language.value;
         opt.value = language.value;
-        document.getElementById("skillBox").options.add(opt);
+        skillBox.options.add(opt);
     }
+});
+
+deleteSkill.addEventListener("click", function () {
+   var index = skillBox.selectedIndex;
+   skillBox.remove(index);
 });
