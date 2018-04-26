@@ -20,7 +20,7 @@ mongoose.connect(db_url)
     .catch((err) => {console.log('Error connecting to mLab', err); });
 
 
-
+var auth = require('./routes/auth');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -53,7 +53,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use('/auth', auth);
 app.use('/', index);
 app.use('/users', users);
 // catch 404 and forward to error handler
@@ -68,6 +68,11 @@ app.use(function(err, req, res, next) {
         err.status = 404;
         err.message = "ObjectId Not Found";
         console.log(err.trace());
+    }
+    if(err.name == 'NotFoundError'){
+        err.status = 404;
+        err.message = " Not Found";
+        console.log(err)
     }
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
