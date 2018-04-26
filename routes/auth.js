@@ -11,7 +11,7 @@ router.post('/login', passport.authenticate('local-login', {
     failureFlash: true
 }));
 router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/makeProfile',
+    successRedirect: '/',
     failureRedirect: '/auth',
     failureFlash: true
 }));

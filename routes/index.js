@@ -14,10 +14,15 @@ router.use(isLoggedIn);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Profile.find({username: req.user.username})
-        .then((doc) => {
-            res.render('account', {user: doc})
-        });
+    if(req.user.status != null){
+        Profile.find({username: req.user.username})
+            .then((doc) => {
+                res.render('account', {user: doc})
+            });
+    }else{
+        res.redirect('/makeProfile');
+    }
+
 });
 
 router.get('/makeProfile', function(err, req, res, next){
