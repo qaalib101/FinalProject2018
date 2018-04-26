@@ -8,7 +8,7 @@ function isLoggedIn(req, res, next) {
         res.locals.username = req.user.local.username;
         next();
     } else {
-        res.redirect('/')
+        res.render('auth')
     }
 }
 router.use(isLoggedIn);
@@ -24,7 +24,12 @@ router.post('/login', passport.authenticate('local-login', {
         failureRedirect: '/',
         failureFlash: true
     }));
-router.post('/account', function(err, req, res, next){
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/',
+    failureFlash: true
+}));
+router.get('/account', function(err, req, res, next){
     Profile.find({username: req.user.local.username})
 .then((doc) => {
             res.render('account', {user: doc});
@@ -33,9 +38,11 @@ router.post('/account', function(err, req, res, next){
             next(err);
         });
 });
-
-router.get('/signup', function(req, res, next){
-    res.render('signup')
+router.get('/profile', function(req, res, next){
+    Profile.findOne({username: req.user.local.username})
+        .then((doc) =>{
+            res.render('signup', {user: doc})
+        });
 });
 
 router.get('/logout', function(req, res, next){
@@ -43,24 +50,12 @@ router.get('/logout', function(req, res, next){
     res.redirect('/auth')
 });
 
-router.post('/makeProfile',passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/',
-    failureFlash: true
-}), function(req, res, next) {
+router.post('/makeProfile', function(req, res, next) {
 
-    var user = Profile(req.body);
-    user.local = {
-        username: req.body.username,
-        password: req.body.password
-    };
-    for(var x = 0; x < req.body.languages.length; x++){
-        user.languages.push(req.body.languages[x]);
-    }
-    for(var y = 0; y < req.body.languages.length; y++){
-        user.skills.push(req.body.languages[x]);
-    }
-    user.save()
+
+    Profile.findOneAndUpdate({username: req.body.username}, {$set:{status: req.body.status}},
+        { $push: { languages: { $each: [req.body.languages], $sort: -1 },
+                skills: { $each: [req.body.skills]} } }).save()
         .then((doc) => {
             console.log(doc);
             res.render('/account', {user: doc});
