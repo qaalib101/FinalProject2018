@@ -1,0 +1,24 @@
+<body>
+<h1>
+    Results from query
+
+</h1>
+{{#each results}}
+    <a href="/project/{{this._id}}">{{this.name}}</a>
+    <br>
+    Creator: {{this.creator}}
+    <br>
+    Description: {{this.description}}
+    <br>
+    Tags:
+    <ul>
+        {{#each this.tags}}
+            {{this}}
+        {{/each}}
+    </ul>
+    <br>
+
+{{/each}}
+All projects <form method="get" action="/listProjects"><button type="submit">All Projects</button></form>
+</body>
+

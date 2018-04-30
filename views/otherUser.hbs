@@ -1,36 +1,41 @@
-<h2>Welcome {{user.username}} to your account page</h2>
 <div class="flash-messages">
     {{#if messages}}
         <p class="error-message">{{messages.error}}</p>
         <p class="info-message">{{messages.info}}</p>
     {{/if}}
 </div>
-<div><form action="/users/editProfile" method="GET">
+<div>
     Profile Name: {{user.username}}
-<br>
+
     Status: {{user.status}}
-<br>
+
     Languages: <ul>
     {{#each user.languages}}
         <p>{{this}}</p>
     {{/each}}
 </ul>
-<br>
     Skills: <ul>
     {{#each user.skills}}
         <p>{{this}}</p>
     {{/each}}
 </ul>
-    <br>
+    Projects: <ul>
+    {{#each user.projects}}
+        <p>{{this}}</p>
+    {{/each}}
+</ul>
     <button type="submit">Edit Profile</button>
-</form>
 
 </div>
 <div>
-    Not working on a project create one:
-    <form action="/createProject" method="get">
-        <button type="submit">Create a project</button>
+    <form method="POST">
+        <button type="submit">Start Messaging</button>
     </form>
+</div>
+<div id="messagingBox">
+    <p>
+
+    </p>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascripts/socketclient"></script>

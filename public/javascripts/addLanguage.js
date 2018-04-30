@@ -1,17 +1,19 @@
 var language = document.getElementById("language");
-var opt = document.createElement("option");
+
 var addLanguage = document.getElementById("addLanguage");
-var deleteLanguage = document.getElementById("deleteLanguage");
-var languageBox = document.getElementById("languageBox");
+
 addLanguage.addEventListener("click", function () {
-    if(skill.text == null){
+    if(language.value == null || language.value == ""){
 
     }else{
+        var languageBox = document.getElementById("languageBox");
+        var opt = document.createElement("option");
         opt.text = language.value;
         opt.value = language.value;
-        languageBox.options.add(opt);
+        languageBox.appendChild(opt);
     }
 });
+var deleteLanguage = document.getElementById("deleteLanguage");
 deleteLanguage.addEventListener("click", function(){
     var index = languageBox.selectedIndex;
     languageBox.remove(index);
@@ -20,14 +22,16 @@ deleteLanguage.addEventListener("click", function(){
 var skill = document.getElementById("skill");
 var addSkill = document.getElementById("addSkill");
 var deleteSkill = document.getElementById("deleteSkill");
-var skillBox = document.getElementById("skillBox");
+
 addSkill.addEventListener("click", function () {
-    if(skill.text == null){
+    if(skill.value == null || skill.value == ""){
 
     }else{
-        opt.text = language.value;
-        opt.value = language.value;
-        skillBox.options.add(opt);
+        var skillBox = document.getElementById("skillBox");
+        var opt2 = document.createElement("option");
+        opt2.text = skill.value;
+        opt2.value = skill.value;
+        skillBox.appendChild(opt2);
     }
 });
 
