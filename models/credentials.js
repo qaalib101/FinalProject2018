@@ -3,6 +3,8 @@
  */
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var Project = require('./project')
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var userSchema = new mongoose.Schema({
     username: String,
@@ -10,7 +12,7 @@ var userSchema = new mongoose.Schema({
     status: String,
     languages: [],
     skills: [],
-    projects: []
+    projects: [ { type : ObjectId, ref : 'Project' } ]
 });
 
 userSchema.methods.generateHash = function(password) {
