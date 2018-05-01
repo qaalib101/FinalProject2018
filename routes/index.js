@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Profile = require('../models/credentials');
-var Project = require('../public/javascripts/projects');
+var Project = require('../models/project');
 
 
 
@@ -72,14 +72,19 @@ router.get('/project'+ ':_id', function(req, res, next){
 router.get('/createProject', function (req, res, next) {
     res.render('createProject');
 });
-router.post('/createProject', function (req, res, next) {
-    var newProject = Project(req.body.name, req.user.username, req.body.description);
 
-    var project = Project({name : req.body.name, description: req.body.description,
-    githubLink: req.body.githubLink, creator: req.user.username});
-    Profile.update({username: req.user.username},
-        {$addToSet: {projects: {$each: [req.body.name]}}})
-    project.save()
+router.post('/createProject', function (req, res, next) {
+    var newProject = Project(req.body) //.name, req.user.username, req.body.description);
+
+    req.user.projects.push(newProject)
+
+    req.user.projects.save()
+
+    // // var project = Project({name : req.body.name, description: req.body.description,
+    // // githubLink: req.body.githubLink, creator: req.user.username});
+    // Profile.update({username: req.user.username},
+    //     {$addToSet: {projects: {$each: [req.body.name]}}})
+    // project.save()
         .then((doc)=> {
             res.render();
         })
