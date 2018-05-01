@@ -3,17 +3,9 @@ var router = express.Router();
 var passport = require('passport');
 var Profile = require('../models/credentials');
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        console.log(res.locals.username);
-        res.locals.username = req.user.username;
-        next();
-    } else {
-        res.redirect('/auth')
-    }
-}
+
 /* GET users listing. */
-router.get('/', isLoggedIn(),function(err, req, res, next){
+router.get('/',function(req, res, next){
   console.log(req.user);
     Profile.find({username: req.user.username})
         .then((doc) => {
@@ -24,13 +16,13 @@ router.get('/', isLoggedIn(),function(err, req, res, next){
         });
 });
 
-router.post('/makeProfile', isLoggedIn(), function(req, res, next) {
+router.post('/makeProfile', function(req, res, next) {
     Profile.findOneAndUpdate({username: req.body.username}, {$set:{status: req.body.status,
             languages: [req.body.languages],
                 skills: [req.body.skills]} }).save()
         .then((doc) => {
             console.log(doc);
-            res.render('/account', {user: doc});
+            res.render('account', {user: doc});
         })
         .catch((err) => {
             next(err);
@@ -39,10 +31,12 @@ router.post('/makeProfile', isLoggedIn(), function(req, res, next) {
 router.post('/editProfile', function(req, res, next){
 
     Profile.findOneAndUpdate(
-        {username: req.user.username},
-        {$set: {status: req.body.status}, $addToSet: {languages: [req.body.languages],
-                skills: [req.body.skills]}})
+        {username: req.body.username},
+        {$set: {status: req.body.status},
+            $addToSet: {languages: {$each: [req.body.languages]},
+                skills: {$each: [req.body.skills]}}})
         .then((doc) => {
+            console.log(doc);
                 res.render('account', {user: doc})
             }
         );

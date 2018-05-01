@@ -4,11 +4,11 @@
 
 </h1>
 {{#each results}}
-    <a href="/project/{{this._id}}">{{this.name}}</a>
+    <a href="/project/{{this.projects.name}}">{{this.username.name}}</a>
     <br>
-    Creator: {{this.creator}}
+    Creator: {{this.username.creator}}
     <br>
-    Description: {{this.description}}
+    Description: {{this.project.description}}
     <br>
     Tags:
     <ul>

@@ -5,7 +5,7 @@
         <p class="info-message">{{messages.info}}</p>
     {{/if}}
 </div>
-<div><form action="/users/editProfile" method="GET">
+<div>
     Profile Name: {{user.username}}
 <br>
     Status: {{user.status}}
@@ -22,7 +22,19 @@
     {{/each}}
 </ul>
     <br>
+    Projects: <ul>
+    {{#if user.projects}}
+        {{#each user.projects}}
+            <p>{{this}}</p>
+        {{/each}}
+    {{else}}
+        You have no projects
+    {{/if}}
+
+</ul>
+    <form action="/users/editProfile" method="GET">
     <button type="submit">Edit Profile</button>
+        <input type="hidden" name = {{user.username}}>
 </form>
 
 </div>

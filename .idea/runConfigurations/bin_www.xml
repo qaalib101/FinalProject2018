@@ -3,6 +3,7 @@
     <envs>
       <env name="DEBUG" value="FinalProject2018:*" />
       <env name="MONGO_URL" value="mongodb://qaalib101:Hooyo101@ds257579.mlab.com:57579/userprofiles" />
+      <env name="PROJECT_URL" value="mongodb://qaalib101:Hooyo101@ds257579.mlab.com:57579/collaborations" />
     </envs>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />

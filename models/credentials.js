@@ -9,7 +9,8 @@ var userSchema = new mongoose.Schema({
     password: String,
     status: String,
     languages: [],
-    skills: []
+    skills: [],
+    projects: []
 });
 
 userSchema.methods.generateHash = function(password) {

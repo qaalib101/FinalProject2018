@@ -14,11 +14,10 @@ var passportConfig = require('./config/authentication')(passport);
 
 
 var db_url = process.env.MONGO_URL;
-
+var project_url = process.env.PROJECT_URL;
 mongoose.connect(db_url)
-    .then(() => {console.log('Connected to mLab');})
+    .then(() => {console.log('Connected to profileDB');})
     .catch((err) => {console.log('Error connecting to mLab', err); });
-
 
 var auth = require('./routes/auth');
 var users = require('./routes/users');

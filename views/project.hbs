@@ -1,0 +1,17 @@
+<h1>Project Info</h1>
+<div>
+    Project Name: {{project.name}}
+    <br>
+    Status: {{project.status}}
+    <br>
+    Creator: {{project.creator}}
+    <br>
+    Project Description: <p>{{project.description}}</p>
+    <br>
+    {{#if project.githubLink}}
+        Github Link: {{project.githubLink}}
+    {{else}}
+        This project does not currently have a github repository
+    {{/if}}
+    <br>
+</div>
