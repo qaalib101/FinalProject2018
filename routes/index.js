@@ -70,19 +70,16 @@ router.get('/project'+ ':_id', function(req, res, next){
         })
 });
 router.get('/createProject', function (req, res, next) {
-    res.render('createProject');
+    res.render('newProject');
 });
 router.post('/createProject', function (req, res, next) {
-    var newProject = Project(req.body.name, req.user.username, req.body.description);
+    var newProject = new Project(req.body.name, req.user.username, req.body.description);
 
-    var project = Project({name : req.body.name, description: req.body.description,
-    githubLink: req.body.githubLink, creator: req.user.username});
     Profile.update({username: req.user.username},
-        {$addToSet: {projects: {$each: [req.body.name]}}})
-    project.save()
-        .then((doc)=> {
-            res.render();
-        })
+        {$addToSet: {projects: {$each: [newProject]}}})
+        .then((doc) => {
+        res.render('account', {user: doc})
+        });
 });
 
 

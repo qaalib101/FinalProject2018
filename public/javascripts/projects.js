@@ -36,5 +36,13 @@ class Project{
     set description(value) {
         this._description = value;
     }
+
+    set githubLink(value) {
+        this._githubLink = value;
+    }
+
+    set status(value) {
+        this._status = value;
+    }
 }
-module.exports(Project);
+module.exports = Project;

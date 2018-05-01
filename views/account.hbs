@@ -1,4 +1,4 @@
-<h2>Welcome {{user.username}} to your account page</h2>
+<h2>Welcome {{username}} to your account page</h2>
 <div class="flash-messages">
     {{#if messages}}
         <p class="error-message">{{messages.error}}</p>
@@ -6,18 +6,18 @@
     {{/if}}
 </div>
 <div>
-    Profile Name: {{user.username}}
+    Profile Name: {{username}}
 <br>
-    Status: {{user.status}}
+    Status: {{status}}
 <br>
     Languages: <ul>
-    {{#each user.languages}}
+    {{#each languages}}
         <p>{{this}}</p>
     {{/each}}
 </ul>
 <br>
     Skills: <ul>
-    {{#each user.skills}}
+    {{#each skills}}
         <p>{{this}}</p>
     {{/each}}
 </ul>
@@ -32,7 +32,7 @@
     {{/if}}
 
 </ul>
-    <form action="/users/editProfile" method="GET">
+    <form action="/editProfile" method="GET">
     <button type="submit">Edit Profile</button>
         <input type="hidden" name = {{user.username}}>
 </form>

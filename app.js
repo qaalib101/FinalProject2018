@@ -74,12 +74,10 @@ app.use(function(err, req, res, next) {
     if(err.name == 'NotFoundError'){
         err.status = 404;
         err.message = " Not Found";
-        console.log(err)
     }
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    console.log(err.kind);
     console.log(err);
     // render the error page
     res.status(err.status || 500);
