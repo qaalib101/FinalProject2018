@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 router.post('/editProfile', function(req, res, next){
 
     Profile.findOneAndUpdate(
-        {username: req.body.username},
+        {username: req.user.username},
         {$set: {status: req.body.status},
             $addToSet: {languages: {$each: [req.body.languages]},
                 skills: {$each: [req.body.skills]}}})
@@ -48,7 +48,7 @@ router.get('/editProfile', function(req, res, next){
             res.render('editProfile', {user: doc});
         })
 });
-router.get('/viewProfile', function(req, res, next){
+router.get('/account' + '/:_id', function(req, res, next){
     Profile.find({username: req.body.username})
         .then((doc) => {
             res.render('otherUser', {user: doc})
@@ -77,28 +77,25 @@ router.get('/createProject', function (req, res, next) {
 });
 
 router.post('/createProject', function (req, res, next) {
-  console.log(req.body)
-    var newProject = Project(req.body) //.name, req.user.username, req.body.description);
+  console.log(req.body);
+    var newProject = Project(req.body); //.name, req.user.username, req.body.description);
 
-    newProject.save().then( (proj) =>{
+    newProject.save()
+        .then( (proj) =>{
 
-      console.log(req.user)
+      console.log(req.user);
 
-      req.user.projects.push(proj)
+      req.user.projects.push(proj);
 
 
       req.user.save()
 
-      // // var project = Project({name : req.body.name, description: req.body.description,
-      // // githubLink: req.body.githubLink, creator: req.user.username});
-      // Profile.update({username: req.user.username},
-      //     {$addToSet: {projects: {$each: [req.body.name]}}})
-      // project.save()
           .then((doc)=> {
-              res.redirect('/');
-          }).catch(err => {console.log(err); next(err);} )
-
-
+              res.render('project', {project: doc});
+          }).catch(
+          (err) => {
+              console.log(err); next(err);
+          })
     })
 
 });

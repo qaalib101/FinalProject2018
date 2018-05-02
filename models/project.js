@@ -5,8 +5,11 @@ var mongoose = require('mongoose');
 
 var projectSchema = new mongoose.Schema({
     name: String,
+    creator: String,
     githubLink: String,
-    status: String
+    status: String,
+    description: String,
+
 });
 
 var Project = mongoose.model('Project', projectSchema);
