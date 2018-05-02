@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Profile = require('../models/credentials');
-var Project = require('../public/javascripts/projects');
+var Project = require('../models/project');
 
 
 
@@ -19,9 +19,12 @@ router.use(isLoggedIn);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    Profile.find({username: req.user.username})
+    Profile.findById(req.user._id)
+        .populate('projects')
             .then((doc) => {
                 console.log(doc);
+                console.log(doc.projects);
+
                 res.render('account', {user: doc})});
 });
 
@@ -72,14 +75,32 @@ router.get('/project'+ ':_id', function(req, res, next){
 router.get('/createProject', function (req, res, next) {
     res.render('newProject');
 });
-router.post('/createProject', function (req, res, next) {
-    var newProject = new Project(req.body.name, req.user.username, req.body.description);
 
-    Profile.update({username: req.user.username},
-        {$addToSet: {projects: {$each: [newProject]}}})
-        .then((doc) => {
-        res.render('account', {user: doc})
-        });
+router.post('/createProject', function (req, res, next) {
+  console.log(req.body)
+    var newProject = Project(req.body) //.name, req.user.username, req.body.description);
+
+    newProject.save().then( (proj) =>{
+
+      console.log(req.user)
+
+      req.user.projects.push(proj)
+
+
+      req.user.save()
+
+      // // var project = Project({name : req.body.name, description: req.body.description,
+      // // githubLink: req.body.githubLink, creator: req.user.username});
+      // Profile.update({username: req.user.username},
+      //     {$addToSet: {projects: {$each: [req.body.name]}}})
+      // project.save()
+          .then((doc)=> {
+              res.redirect('/');
+          }).catch(err => {console.log(err); next(err);} )
+
+
+    })
+
 });
 
 

@@ -25,7 +25,9 @@
     Projects: <ul>
     {{#if user.projects}}
         {{#each user.projects}}
-            <p>{{this}}</p>
+            <p>{{this.name}}</p>
+            <p>{{this.githubLink}}</p>
+            <hr>
         {{/each}}
     {{else}}
         You have no projects
