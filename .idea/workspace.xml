@@ -453,7 +453,7 @@
       <workItem from="1525213377981" duration="7802000" />
       <workItem from="1525442387884" duration="1669000" />
       <workItem from="1525447165350" duration="27854000" />
-      <workItem from="1525653963293" duration="10826000" />
+      <workItem from="1525653963293" duration="10782000" />
     </task>
     <task id="LOCAL-00001" summary="added authentication">
       <created>1524704584573</created>
@@ -508,7 +508,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140888000" />
+    <option name="totallyTimeSpent" value="140844000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
