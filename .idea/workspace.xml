@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f9481a9-8872-42cf-8c5d-f9da2245de5d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/confirmDelete.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/views/otherProject.hbs" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change beforePath="$PROJECT_DIR$/models/credentials.js" afterPath="$PROJECT_DIR$/models/credentials.js" />
-      <change beforePath="$PROJECT_DIR$/models/project.js" afterPath="$PROJECT_DIR$/models/project.js" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change beforePath="$PROJECT_DIR$/routes/auth.js" afterPath="$PROJECT_DIR$/routes/auth.js" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change beforePath="$PROJECT_DIR$/socketclient/socket.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/views/account.hbs" afterPath="$PROJECT_DIR$/views/account.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/editProfile.hbs" afterPath="$PROJECT_DIR$/views/editProfile.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/editProject.hbs" afterPath="$PROJECT_DIR$/views/editProject.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/layout.hbs" afterPath="$PROJECT_DIR$/views/layout.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/newProject.hbs" afterPath="$PROJECT_DIR$/views/newProject.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/otherUser.hbs" afterPath="$PROJECT_DIR$/views/otherUser.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/project.hbs" afterPath="$PROJECT_DIR$/views/project.hbs" />
-      <change beforePath="$PROJECT_DIR$/views/results.hbs" afterPath="$PROJECT_DIR$/views/results.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -453,7 +435,7 @@
       <workItem from="1525213377981" duration="7802000" />
       <workItem from="1525442387884" duration="1669000" />
       <workItem from="1525447165350" duration="27854000" />
-      <workItem from="1525653963293" duration="10782000" />
+      <workItem from="1525653963293" duration="10833000" />
     </task>
     <task id="LOCAL-00001" summary="added authentication">
       <created>1524704584573</created>
@@ -504,11 +486,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525216516757</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="problem with authentication">
+      <created>1525664862613</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1525664862613</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140844000" />
+    <option name="totallyTimeSpent" value="140895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
