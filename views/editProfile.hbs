@@ -27,6 +27,7 @@
             {{#each user.skills}}
                 <option>{{this}}</option>
             {{/each}}
+        </select><button id="addSkill" type="button">Add</button><button id="deleteSkill">Remove</button>
         <br>
         <input type="hidden" name="username" value="{{user.username}}">
         <button type=submit>Submit</button>

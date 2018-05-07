@@ -3,21 +3,15 @@
     Results from query
 </h1>
 {{#each results}}
-    <a href="/project/{{this.projects.name}}">{{this.username.name}}</a>
+    <a href="/project/{{this._id}}">{{this.name}}</a>
     <br>
-    Creator: {{this.username.creator}}
+    Description: {{this.description}}
     <br>
-    Description: {{this.project.description}}
+    Github Link: {{this.githubLink}}
     <br>
-    Tags:
-    <ul>
-        {{#each this.tags}}
-            {{this}}
-        {{/each}}
-    </ul>
-    <br>
+    <form action="/project/">
 
+    </form>
 {{/each}}
-All projects <form method="get" action="/listProjects"><button type="submit">All Projects</button></form>
 </body>
 

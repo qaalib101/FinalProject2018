@@ -1,17 +1,25 @@
 <h1>Project Info</h1>
 <div>
-    Project Name: {{project.name}}
+    Project Name: <p>{{project.name}}</p>
     <br>
-    Status: {{project.status}}
+    Status: <p>{{project.status}}</p>
     <br>
-    Creator: {{project.creator}}
+    Creator: <p><a href="/account/{{project.creator._id}}">{{project.creator.username}}</a></p>
     <br>
     Project Description: <p>{{project.description}}</p>
     <br>
     {{#if project.githubLink}}
-        Github Link: <a href="project.githubLink">{{project.githubLink}}</a>
+        <p>Github Link: <a href="">{{project.githubLink}}</a></p>
     {{else}}
-        This project does not currently have a github repository
+        <p>This project does not currently have a github repository</p>
     {{/if}}
     <br>
 </div>
+<div>
+    <p><a href="/editProject/{{project._id}}">Edit Project</a></p>
+    <form method="post" action="/deleteProject">
+        <button id="deleteButton">Delete Project</button>
+        <input type="hidden" name="_id" value="{{project._id}}">
+    </form>
+</div>
+<script src="/javascripts/confirmDelete.js"></script>

@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var Project = require('./project')
+var Project = require('./project');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var userSchema = new mongoose.Schema({

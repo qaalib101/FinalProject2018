@@ -8,37 +8,32 @@
 <div>
     Profile Name: {{username}}
 <br>
-    Status: {{status}}
+    Status: {{user.status}}
 <br>
-    Languages: <ul>
-    {{#each languages}}
+    Languages:
+    {{#each user.languages}}
         <p>{{this}}</p>
     {{/each}}
-</ul>
 <br>
-    Skills: <ul>
-    {{#each skills}}
+    Skills:
+    {{#each user.skills}}
         <p>{{this}}</p>
     {{/each}}
-</ul>
     <br>
-    Projects: <ul>
-    {{#if user.projects}}
-        {{#each user.projects}}
-            <p>{{this.name}}</p>
-            <p>{{this.githubLink}}</p>
-            <hr>
-        {{/each}}
-    {{else}}
-        You have no projects
-    {{/if}}
+{{#if user.projects}}
+    Projects:
+    {{#each user.projects}}
+        <p><a href="/project/{{this._id}}">{{this.name}}</a></p>
+        <p>{{this.description}}</p>
+        <hr>
+    {{/each}}
+{{else}}
+    You have no projects!
+{{/if}}
 
-</ul>
-    <form action="/editProfile" method="GET">
-    <button type="submit">Edit Profile</button>
-        <input type="hidden" name = {{user.username}}>
-</form>
-
+<div>
+    <p><a href="/editProfile/{{user._id}}">Edit Profile</a></p>
+</div>
 </div>
 <div>
     Not working on a project create one:

@@ -69,7 +69,7 @@ app.use(function(err, req, res, next) {
     if(err.kind === 'ObjectId' && err.name == 'CastError'){
         err.status = 404;
         err.message = "ObjectId Not Found";
-        console.log(err.trace());
+        console.log(err.trace);
     }
     if(err.name == 'NotFoundError'){
         err.status = 404;

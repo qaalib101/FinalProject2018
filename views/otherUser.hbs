@@ -5,33 +5,22 @@
     {{/if}}
 </div>
 <div>
-    Profile Name: {{user.username}}
+    Profile Name: <p>{{user.username}}</p>
 
-    Status: {{user.status}}
+    Status: <p>{{user.status}}</p>
 
-    Languages: <ul>
+    Languages:
     {{#each user.languages}}
         <p>{{this}}</p>
     {{/each}}
-</ul>
-    Skills: <ul>
+<br>
+    Skills:
     {{#each user.skills}}
         <p>{{this}}</p>
     {{/each}}
-</ul>
-    Projects: <ul>
+<br>
+        Projects:
     {{#each user.projects}}
-        <p>{{this}}</p>
+            <p><a href="/project/{{this}}">{{this}}</a></p>
+            <hr>
     {{/each}}
-<div>
-    <form method="POST">
-        <button type="submit">Start Messaging</button>
-    </form>
-</div>
-<div id="messagingBox">
-    <p>
-
-    </p>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/javascripts/socketclient"></script>

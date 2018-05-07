@@ -1,10 +1,9 @@
-<h1>Edit Project: {{this.name}}</h1>
-<form method="post" action="/editProject">
-    Project name: <input name="name">
+<h1>Edit Project: {{project.name}}</h1>
+<form action="/editProject" method="post">
+    Name: <input name="name">
     <br>
-    Project description: <textarea name="description"></textarea>
-    <br>
-    Github Link: <input name="githubLink">
+    Description: <textarea name="description">
+</textarea>
     <br>
     Status: <select name="status">
     <option>
@@ -18,5 +17,7 @@
     </option>
 </select>
     <br>
-    <button type="submit">Create Project</button>
+    <input type="hidden" name="_id" value="{{project._id}}">
+    <button >Save Edits</button>
 </form>
+

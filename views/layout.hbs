@@ -7,12 +7,16 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <form action="/searchProjects" method="post">
-      <input type="text" placeholder="Search for projects..." name="query">
-      <button type="submit">Search</button>
+  <form action="/auth/logout" method="get">
+      <button type="submit" >Logout</button>
+  </form>
+  <form action="/" method="get">
+      <button type="submit">Home</button>
+  </form>
+  <form method="get" action="/listProjects">
+      <button type="submit">All Projects</button>
   </form>
   <body>
     {{{body}}}
-
   </body>
 </html>
