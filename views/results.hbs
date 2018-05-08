@@ -3,12 +3,16 @@
     Results from query
 </h1>
 {{#each results}}
-    <a href="/project/{{this._id}}">{{this.name}}</a>
-    <br/>
-    Description: {{this.description}}
-    <br/>
-    Github Link: {{this.githubLink}}
-    <br/>
+    <p>
+        <a href="/project/{{this._id}}">{{this.name}}</a>
+        <br>
+        Status: {{this.status}}
+        <br/>
+        Description: {{this.description}}
+        <br/>
+        Github Link: {{this.githubLink}}
+        <br/>
+    </p>
 {{/each}}
 <br/>
 </body>
