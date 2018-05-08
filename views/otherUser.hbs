@@ -10,17 +10,31 @@
     Status: <p>{{user.status}}</p>
 
     Languages:
+<ul>
     {{#each user.languages}}
+    <li>
         <p>{{this}}</p>
-    {{/each}}
+    </li>
+        {{/each}}
+</ul>
+
 <br>
     Skills:
+<ul>
     {{#each user.skills}}
+    <li>
         <p>{{this}}</p>
+    </li>
     {{/each}}
+</ul>
+
 <br>
-        Projects:
+    Projects:
+<li>
     {{#each user.projects}}
-            <p><a href="/project/{{this}}">{{this}}</a></p>
-            <hr>
+    <ul>
+        <p><a href="/project/{{this}}">{{this}}</a></p>
+        <hr>
+    </ul>
     {{/each}}
+</li>

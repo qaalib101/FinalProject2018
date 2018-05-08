@@ -1,9 +1,14 @@
+<div id="container">
+    <div id="jumbotron">
+        <h1>Log or Signup</h1>
+    </div>
+</div>
 <ul>{{#each messages}}
     <li>{{this}}</li>
 {{/each}}
 </ul>
 <div id="login">
-    <h2>Log in</h2>
+    <h4>Log in </h4>
     <form action="/auth/login" method="POST">
         <label for="username">Username</label>
         <input type="text" name="username" required>
@@ -16,7 +21,7 @@
 </div>
 
 <div id = 'signup'>
-    <h2>Sign up for an account if you do not have one</h2>
+    <h4>Sign up</h4>
     <form action="/auth/signup" method="POST">
         <label for="username">Username</label>
         <input type="text" name="username" required>

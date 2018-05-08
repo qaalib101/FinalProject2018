@@ -1,32 +1,38 @@
 <h2>Welcome {{username}} to your account page</h2>
-<div class="flash-messages">
-    {{#if messages}}
-        <p class="error-message">{{messages.error}}</p>
-        <p class="info-message">{{messages.info}}</p>
-    {{/if}}
-</div>
 <div>
     Profile Name: {{username}}
 <br>
     Status: {{user.status}}
 <br>
     Languages:
-    {{#each user.languages}}
-        <p>{{this}}</p>
-    {{/each}}
+    <ul>
+        {{#each user.languages}}
+        <li>
+            <p>{{this}}</p>
+        </li>
+        {{/each}}
+    </ul>
 <br>
     Skills:
+    <ul>
     {{#each user.skills}}
-        <p>{{this}}</p>
+        <li>
+            <p>{{this}}</p>
+        </li>
     {{/each}}
+    </ul>
     <br>
 {{#if user.projects}}
     Projects:
+<ul>
     {{#each user.projects}}
+    <li>
         <p><a href="/project/{{this._id}}">{{this.name}}</a></p>
-        <p>{{this.description}}</p>
+        <p>Description: {{this.description}}</p>
         <hr>
+    </li>
     {{/each}}
+</ul>
 {{else}}
     You have no projects!
 {{/if}}
