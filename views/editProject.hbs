@@ -1,23 +1,20 @@
 <h1>Edit Project: {{project.name}}</h1>
 <form action="/editProject" method="post">
-    Name: <input name="name">
-    <br>
-    Description: <textarea name="description">
-</textarea>
     <br>
     Status: <select name="status">
-    <option>
+    <option value="Complete">
         Complete
     </option>
-    <option>
+    <option value="Getting There">
         Getting There
     </option>
-    <option>
+    <option value="Not Even Started">
         Not Even Started
     </option>
 </select>
+    <br/>
     <br>
     <input type="hidden" name="_id" value="{{project._id}}">
-    <button >Save Edits</button>
+    <button >Save Status</button>
 </form>
 

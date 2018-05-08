@@ -133,8 +133,12 @@ router.get('/editProject'+ '/:_id', function(req, res, next){
     console.log(req.params._id);
     Project.findById(req.params._id).
         then((doc) =>{
-            console.log(doc);
-            res.render('editProject', {project: doc});
+            Profile.findById(doc.creator)
+                .then((profile)=>{
+                    console.log(doc);
+                    doc.creator = profile;
+                    res.render('editProject', {project: doc});
+                })
     })
         .catch(
             (err) => {
@@ -145,10 +149,15 @@ router.get('/editProject'+ '/:_id', function(req, res, next){
 router.post('/editProject', function (req, res, next) {
     console.log(req.body._id);
     Project.findOneAndUpdate({_id: req.body._id},
-        {$set: {name: req.body.name, description: req.body.description
-        , githublink: req.body.githubLink, status: req.body.status}})
+        {$set: {status: req.body.status}})
         .then((doc)=> {
-            res.render('project', {project: doc})
+            Profile.findById(doc.creator)
+                .then((profile)=> {
+                    doc.creator = profile;
+                    console.log(doc);
+                    res.render('project', {project: doc})
+                });
+
         })
         .catch(
         (err) => {
