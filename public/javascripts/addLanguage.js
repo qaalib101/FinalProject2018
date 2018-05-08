@@ -2,7 +2,7 @@ addLanguage = document.getElementById("addLanguage");
 language = document.getElementById("language");
 languages = document.getElementById("languageBox");
 deleteLanguage = document.getElementById("deleteLanguage");
-
+// add language to select box
 addLanguage.addEventListener("click", function () {
     if(language.value == ""){
 
@@ -13,7 +13,7 @@ addLanguage.addEventListener("click", function () {
         languages.add(opt);
     }
 });
-
+// delete language from select
 deleteLanguage.addEventListener("click", function(){
     languages.remove(languages.selectedIndex);
 });

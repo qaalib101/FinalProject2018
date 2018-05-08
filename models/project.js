@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var User = require('./credentials');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-
+// created a one to one relationship with user
 var projectSchema = new mongoose.Schema({
     name: String,
     githubLink: String,

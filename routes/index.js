@@ -5,7 +5,7 @@ var Project = require('../models/project');
 
 
 
-
+// is logged in checks for the user logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         res.locals.username = req.user.username;
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
             .then((doc) => {
                 res.render('account', {user: doc})});
 });
-
+// link to edit profile page
 router.get('/editProfile/:_id', function(req, res, next){
     console.log(req.params._id);
     Profile.findById(req.params._id)
@@ -33,7 +33,7 @@ router.get('/editProfile/:_id', function(req, res, next){
             res.render('editProfile', {user: doc});
         })
 });
-
+// editing profile and saving on mongodb
 router.post('/editProfile', function(req, res, next){
 
     Profile.findOneAndUpdate(
@@ -47,9 +47,10 @@ router.post('/editProfile', function(req, res, next){
             }
         );
 });
-
+// link to other user account
 router.get('/account/:_id', function(req, res, next){
-    console.log(req.params._id);
+
+    console.log(req.params._id); // for error checking
     Profile.findById(req.params._id)
         .then((doc) => {
             console.log(doc);
@@ -65,13 +66,14 @@ router.get('/account/:_id', function(req, res, next){
                 console.log(err); next(err);
             })
 });
-
+// listing all the projects
 router.get('/listProjects', function(req, res, next){
     Project.find()
         .then((doc) => {
             res.render('results', {results:doc})
         })
 });
+// get project page using link
 router.get('/project'+ '/:_id', function(req, res, next){
     Project.findById(req.params._id)
             .then((doc) => {
@@ -89,6 +91,7 @@ router.get('/project'+ '/:_id', function(req, res, next){
 
             })
 });
+// deleting a project
 router.post('/deleteProject', function (req, res, next) {
     Project.findByIdAndRemove(req.body._id)
         .then((project)=>{
@@ -98,12 +101,14 @@ router.post('/deleteProject', function (req, res, next) {
                 })
         });
 });
+// creating a new project
 router.get('/createProject', function (req, res, next) {
     res.render('newProject');
 });
 
 router.post('/createProject', function (req, res, next) {
   console.log(req.user.username);
+  // create new project object and save it in the mongodb
     var newProject = Project({name: req.body.name,
         description: req.body.description,
         creator: req.user,
@@ -113,7 +118,7 @@ router.post('/createProject', function (req, res, next) {
         .then( (proj) =>{
 
       console.log(proj);
-
+// push project to user project array
       req.user.projects.push(proj);
 
       req.user.save()
@@ -126,6 +131,7 @@ router.post('/createProject', function (req, res, next) {
     })
 
 });
+// get edit project page using a link
 router.get('/editProject'+ '/:_id', function(req, res, next){
     console.log(req.params._id);
     Project.findById(req.params._id)
@@ -143,6 +149,8 @@ router.get('/editProject'+ '/:_id', function(req, res, next){
                 next(err);
             })
 });
+//posting and saving project edits
+
 router.post('/editProject', function (req, res, next) {
     console.log(req.body._id);
     Project.findOneAndUpdate({_id: req.body._id},
