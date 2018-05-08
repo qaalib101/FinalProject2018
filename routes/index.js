@@ -22,9 +22,6 @@ router.get('/', function(req, res, next) {
     Profile.findById(req.user._id)
         .populate('projects')
             .then((doc) => {
-                console.log(doc);
-                console.log(doc.projects);
-
                 res.render('account', {user: doc})});
 });
 
@@ -94,7 +91,7 @@ router.get('/project'+ '/:_id', function(req, res, next){
 });
 router.post('/deleteProject', function (req, res, next) {
     Project.findByIdAndRemove(req.body._id)
-        .save().then((project)=>{
+        .then((project)=>{
             Profile.findById(req.user._id)
                 .then((doc)=>{
                     res.render('account', {user: doc})
@@ -131,8 +128,8 @@ router.post('/createProject', function (req, res, next) {
 });
 router.get('/editProject'+ '/:_id', function(req, res, next){
     console.log(req.params._id);
-    Project.findById(req.params._id).
-        then((doc) =>{
+    Project.findById(req.params._id)
+        .then((doc) =>{
             Profile.findById(doc.creator)
                 .then((profile)=>{
                     console.log(doc);
