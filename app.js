@@ -1,12 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
+var exphbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var flash = require('express-flash');
 var session = require('express-session');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var MongoDBStore = require('connect-mongodb-session')(session);
+var MongoDBStore = require('connect-mongo')(session);
 var passport = require('passport');
 var passportConfig = require('./config/authentication')(passport);
 
@@ -16,8 +17,9 @@ var passportConfig = require('./config/authentication')(passport);
 var db_url = process.env.MONGO_URL;
 var project_url = process.env.PROJECT_URL;
 mongoose.connect(db_url)
-    .then(() => {console.log('Connected to profileDB');})
+    .then(() => {console.log('Connected to swerveDB');})
     .catch((err) => {console.log('Error connecting to mLab', err); });
+const db = mongoose.connection
 
 var auth = require('./routes/auth');
 var users = require('./routes/users');
@@ -31,7 +33,10 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'), exphbs({
+    defaultLayout: 'layout',
+    extname: '.hbs'
+}));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -44,7 +49,8 @@ app.use(flash());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-var store = MongoDBStore({uri: db_url, collection: 'index'});
+
+var store = new MongoDBStore({mongooseConnection: db});
 app.use(session({
     secret: 'top secret',
     resave: true,
@@ -78,10 +84,10 @@ app.use(function(err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  //  console.log(err);
+    console.log(err);
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('base/error');
 });
 
 module.exports = app;

@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     Profile.findById(req.user._id)
         .populate('projects')
             .then((doc) => {
-                res.render('account', {user: doc})});
+                res.render('profile/account', {user: doc})});
 });
 // link to edit profile page
 router.get('/editProfile/:_id', function(req, res, next){
@@ -30,7 +30,7 @@ router.get('/editProfile/:_id', function(req, res, next){
     Profile.findById(req.params._id)
         .then((doc)=> {
             console.log(doc);
-            res.render('editProfile', {user: doc});
+            res.render('profile/editProfile', {user: doc});
         })
 });
 // editing profile and saving on mongodb
@@ -43,7 +43,7 @@ router.post('/editProfile', function(req, res, next){
                 skills: {$each: [req.body.skills]}}})
         .then((doc) => {
                 console.log(doc);
-                res.render('account', {user: doc})
+                res.render('profile/account', {user: doc})
             }
         );
 });
@@ -58,7 +58,7 @@ router.get('/account/:_id', function(req, res, next){
                 res.redirect('/');
             }
             else{
-                res.render('otherUser', {user: doc})
+                res.render('profile/otherUser', {user: doc})
             }
         })
         .catch(
@@ -70,7 +70,7 @@ router.get('/account/:_id', function(req, res, next){
 router.get('/listProjects', function(req, res, next){
     Project.find()
         .then((doc) => {
-            res.render('results', {results:doc})
+            res.render('base/results', {results:doc})
         })
 });
 // get project page using link
@@ -82,9 +82,9 @@ router.get('/project'+ '/:_id', function(req, res, next){
                         doc.creator = profile;
                         console.log(doc);
                         if(doc.creator._id.equals(req.user._id)){
-                            res.render('project', {project: doc})
+                            res.render('projects/project', {project: doc})
                         }else{
-                            res.render('otherProject', {project: doc})
+                            res.render('projects/otherProject', {project: doc})
                         }
                     });
 
@@ -103,11 +103,10 @@ router.post('/deleteProject', function (req, res, next) {
 });
 // creating a new project
 router.get('/createProject', function (req, res, next) {
-    res.render('newProject');
+    res.render('projects/newProject');
 });
 
 router.post('/createProject', function (req, res, next) {
-  console.log(req.user.username);
   // create new project object and save it in the mongodb
     var newProject = Project({name: req.body.name,
         description: req.body.description,
@@ -123,7 +122,7 @@ router.post('/createProject', function (req, res, next) {
 
       req.user.save()
           .then((doc)=> {
-              res.render('project', {project: proj});
+              res.render('projects/project', {project: proj});
           }).catch(
           (err) => {
               console.log(err); next(err);
@@ -140,7 +139,7 @@ router.get('/editProject'+ '/:_id', function(req, res, next){
                 .then((profile)=>{
                     console.log(doc);
                     doc.creator = profile;
-                    res.render('editProject', {project: doc});
+                    res.render('projects/editProject', {project: doc});
                 })
     })
         .catch(
@@ -160,7 +159,7 @@ router.post('/editProject', function (req, res, next) {
                 .then((profile)=> {
                     doc.creator = profile;
                     console.log(doc);
-                    res.render('project', {project: doc})
+                    res.render('projects/project', {project: doc})
                 });
 
         })

@@ -15,7 +15,7 @@ var projectSchema = new mongoose.Schema({
     creator: {type: ObjectId, ref: 'User'}
 });
 
-var Project = mongoose.model('Project', projectSchema);
+var Project = mongoose.model('Project', projectSchema, 'project');
 
 
 module.exports = Project;
