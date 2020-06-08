@@ -6,12 +6,18 @@ var bcrypt = require('bcrypt-nodejs');
 var Project = require('./project');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 // imported project schema to create one to many relationship between user and projects
-var userSchema = new mongoose.Schema({
+var userSchema = mongoose.Schema({
     username: String,
     password: String,
     status: String,
-    languages: [],
-    skills: [],
+    languages:{
+        type: [String],
+        default: undefined
+    },
+    skills:{
+        type: [String],
+        default: undefined
+    } ,
     projects: [ { type : ObjectId, ref : 'Project' } ]
 });
 

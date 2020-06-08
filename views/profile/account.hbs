@@ -1,51 +1,78 @@
-<h2>Welcome {{username}} to your account page</h2>
-<div>
-    Profile Name: {{username}}
-<br>
-    Status: {{user.status}}
-<br>
-    Languages:
-    <ul>
-        {{#each user.languages}}
-        <li>
-            <p>{{this}}</p>
-        </li>
-        {{/each}}
-    </ul>
-<br>
-    Skills:
-    <ul>
-    {{#each user.skills}}
-        <li>
-            <p>{{this}}</p>
-        </li>
-    {{/each}}
-    </ul>
-    <br>
-{{#if user.projects}}
-    Projects:
-<ul>
-    {{#each user.projects}}
-    <li>
-        <p><a href="/project/{{this._id}}">{{this.name}}</a></p>
-        <p>Description: {{this.description}}</p>
-        <hr>
+<h1 align="center">Account Page</h2>
+<div class="container mt-3">
+  <h2>Profile Page</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#general">General</a>
     </li>
-    {{/each}}
-</ul>
-{{else}}
-    You have no projects!
-{{/if}}
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#projects">Projects</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#skills">Skills</a>
+    </li>
+  </ul>
 
-<div>
-    <p><a href="/editProfile/{{user._id}}">Edit Profile</a></p>
-</div>
-</div>
-<div>
-    Not working on a project create one:
-    <form action="/createProject" method="get">
-        <button type="submit">Create a project</button>
-    </form>
+  <!-- Tab panes -->
+    <div class="tab-content">
+                <div id="general" class="container tab-pane active"><br>
+            <h3>GENERAL INFO</h3>
+                <p>
+                <div>
+                    Profile Name: {{username}}
+                <br>
+                    Status: {{user.status}}
+                <br>
+                <div>
+                    <p><a href="/editProfile/{{user._id}}">Edit Profile</a></p>
+                </div>
+            </p>
+        </div>
+        <div id="projects" class="container tab-pane fade"><br>
+            <h3>Projects</h3>
+            <p>
+            <br>
+            {{#if user.projects}}
+                Projects:
+            <ul>
+            {{#each user.projects}}
+            <li>
+            <p><a href="/project/{{this._id}}">{{this.name}}</a></p>
+            <p>Description: {{this.description}}</p>
+            <hr>
+            </li>
+            {{/each}}
+            </ul>
+            {{else}}
+                You have no projects!
+            {{/if}}
+            </p>
+        </div>
+        <div id="skills" class="container tab-pane fade"><br>
+            <h3>Skills</h3>
+            <p>
+                Languages:
+            <ul>
+                {{#each user.languages}}
+                <li>
+                    <p>{{this}}</p>
+                </li>
+                {{/each}}
+            </ul>
+            <br>
+            Skills:
+            <ul>
+                {{#each user.skills}}
+                <li>
+                    <p>{{this}}</p>
+                </li>
+                {{/each}}
+            </ul>
+            </p>
+        </div>
+    </div>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/javascripts/socketclient"></script>

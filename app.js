@@ -24,14 +24,14 @@ const db = mongoose.connection
 var auth = require('./routes/auth');
 var users = require('./routes/users');
 var index = require('./routes/index');
+var messaging = require('./routes/messaging')
 
 
 
 
 var app = express();
 
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'), exphbs({
     defaultLayout: 'layout',
@@ -62,6 +62,7 @@ app.use(passport.session());
 
 app.use('/auth', auth);
 app.use('/users', users);
+app.use('/messaging', messaging);
 app.use('/', index);
 
 // catch 404 and forward to error handler

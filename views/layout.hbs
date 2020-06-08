@@ -1,56 +1,99 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{title}}</title>
+    <title>Swerve</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-  <div class="wrapper">
-      <!-- Sidebar -->
-      <nav id="sidebar">
-          <div class="sidebar-header">
-              <h3>Menu</h3>
-          </div>
-          <br>
-          <!-- Menu Buttons -->
-          <form action="/auth/logout" method="get">
-              <button type="submit" class="btn btn-default">Logout</button>
-          </form>
-          <br>
-          <form action="/" method="get">
-              <button type="submit" class="btn btn-default">Home</button>
-          </form>
-          <br>
-          <form method="get" action="/listProjects">
-              <button type="submit" class="btn btn-default">All Projects</button>
-          </form>
-      </nav>
-
-      <!-- Page Content -->
-      <div id="content">
-          <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-              Menu
-          </button>
-          {{{body}}}
-      </div>
-  </div>
-  </body>
-  <!-- jquery code for sidebar -->
-  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-  <script>
-      $(document).ready(function () {
-
-          $('#sidebarCollapse').on('click', function () {
-              $('#sidebar').toggleClass('active');
-          });
-
-      });
-  </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+      <!-- jquery code for sidebar -->
+   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Bootstrap Js CDN -->
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <nav id="sidebar" class="toggled">
+
+          <div id="dismiss">
+              <i class="fas fa-arrow-left"></i>
+          </div>
+          <div class="sidebar-header">
+              <h3>Menu</h3>
+          </div>
+          <br>
+          <ul class="list-unstyled components">
+                     <!-- Menu Buttons -->
+            <li>
+              <form action="/auth/logout" method="get">
+                <button type="submit" class="btn btn-primary">Logout</button>
+              </form>              
+            </li>
+            <br>
+            <li>
+              <form action="/" method="get">
+                <button type="submit" class="btn btn-primary">Home</button>
+              </form>
+            </li>
+            <br>
+            <li>
+              <form action="/listProjects" method="get">
+                <button type="submit" class="btn btn-primary">All Projects</button>
+              </form>              
+            </li>
+            <li>
+              <form action="/messaging" method="get">
+                <button type="submit" class="btn btn-primary">Messaging</button>
+              </form>  
+            </li>
+          </ul>
+      </nav>
+      <!-- Page Content -->
+        <div id="content" class="card">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Menu</span>
+                </button>
+            </div>
+            </nav>
+            {{{body}}}
+        </div>
+    <div class="overlay"></div> 
+  </div>
+  
+  </body>
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "dark",
+            autohidescrollbar: true
+        });
+
+        $('#dismiss, .overlay').on('click', function () {
+            // hide overlay
+            $('.overlay').removeClass('active');
+
+            $('#sidebar').removeClass('active');
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            // open sidebar
+            $('#sidebar').addClass('active');
+            // fade in the overlay
+            $('.overlay').addClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+  </script> 
 </html>
