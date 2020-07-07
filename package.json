@@ -27,7 +27,7 @@
     "morgan": "^1.9.1",
     "node-migrate": "^0.1.0",
     "nodemon": "^1.19.4",
-    "npm": "^6.14.5",
+    "npm": "^6.14.6",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "socket.io": "^2.3.0"
