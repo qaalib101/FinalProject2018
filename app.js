@@ -24,7 +24,7 @@ const db = mongoose.connection
 var auth = require('./routes/auth');
 var users = require('./routes/users');
 var index = require('./routes/index');
-var messaging = require('./routes/messaging')
+var messaging = require('./routes/messaging');
 
 
 

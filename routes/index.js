@@ -6,10 +6,10 @@ var Project = require('../models/project');
 
 
 // is logged in checks for the user logged in
-function isLoggedIn(req, res, next) {
+var isLoggedIn = function(req, res, next) {
     if (req.isAuthenticated()) {
-        res.locals.username = req.user.username;
-        next();
+        res.locals.username = req.user.username
+        next()
     } else {
         res.redirect('/auth')
     }
@@ -148,8 +148,8 @@ router.get('/editProject'+ '/:_id', function(req, res, next){
                 next(err);
             })
 });
-//posting and saving project edits
 
+//posting and saving project edits
 router.post('/editProject', function (req, res, next) {
     console.log(req.body._id);
     Project.findOneAndUpdate({_id: req.body._id},

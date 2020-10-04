@@ -1,34 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="bin\www" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="bin\www" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
     <envs>
-      <env name="DEBUG" value="FinalProject2018:*" />
-      <env name="MONGO_URL" value="mongodb://qaalib101:Hooyo101@ds257579.mlab.com:57579/userprofiles" />
+      <env name="DEBUG" value="FinalProject2018mongodb+srv://user:farah101@cluster0-1jemt.mongodb.net/swervedev?retryWrites=true&amp;w=majority:*" />
+      <env name="MONGO_URL" value="mongodb+srv://user:farah101@cluster0-1jemt.mongodb.net/swervedev?retryWrites=true&amp;w=majority" />
     </envs>
-    <browser url="http://localhost:3000/" />
-    <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
-      <option name="envVars">
-        <list />
-      </option>
-      <option name="extraHosts">
-        <list />
-      </option>
-      <option name="links">
-        <list />
-      </option>
-      <option name="networkDisabled" value="false" />
-      <option name="networkMode" value="bridge" />
-      <option name="portBindings">
-        <list />
-      </option>
-      <option name="publishAllPorts" value="false" />
-      <option name="version" value="1" />
-      <option name="volumeBindings">
-        <list />
-      </option>
-    </EXTENSION>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />
     </EXTENSION>
-    <method />
+    <method v="2" />
   </configuration>
 </component>

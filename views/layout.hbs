@@ -16,84 +16,17 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-
-    <div class="wrapper">
-      <!-- Sidebar -->
-      <nav id="sidebar" class="toggled">
-
-          <div id="dismiss">
-              <i class="fas fa-arrow-left"></i>
-          </div>
-          <div class="sidebar-header">
-              <h3>Menu</h3>
-          </div>
-          <br>
-          <ul class="list-unstyled components">
-                     <!-- Menu Buttons -->
-            <li>
-              <form action="/auth/logout" method="get">
-                <button type="submit" class="btn btn-primary">Logout</button>
-              </form>              
-            </li>
-            <br>
-            <li>
-              <form action="/" method="get">
-                <button type="submit" class="btn btn-primary">Home</button>
-              </form>
-            </li>
-            <br>
-            <li>
-              <form action="/listProjects" method="get">
-                <button type="submit" class="btn btn-primary">All Projects</button>
-              </form>              
-            </li>
-            <li>
-              <form action="/messaging" method="get">
-                <button type="submit" class="btn btn-primary">Messaging</button>
-              </form>  
-            </li>
-          </ul>
-      </nav>
-      <!-- Page Content -->
-        <div id="content" class="card">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Menu</span>
-                </button>
-            </div>
-            </nav>
+    <div class="content">
+        <div class="jumbotron">
+            <h1>Swerve</h1>
+        </div>
+        <div class="card">
             {{{body}}}
         </div>
-    <div class="overlay"></div> 
+      </div>
   </div>
   
   </body>
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="javascripts/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-        $("#sidebar").mCustomScrollbar({
-            theme: "dark",
-            autohidescrollbar: true
-        });
-
-        $('#dismiss, .overlay').on('click', function () {
-            // hide overlay
-            $('.overlay').removeClass('active');
-
-            $('#sidebar').removeClass('active');
-        });
-
-        $('#sidebarCollapse').on('click', function () {
-            // open sidebar
-            $('#sidebar').addClass('active');
-            // fade in the overlay
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
-  </script> 
 </html>
